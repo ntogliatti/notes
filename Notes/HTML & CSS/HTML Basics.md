@@ -1,0 +1,46 @@
+- We should always name the HTML file that will contain the homepage of our websites `index.html`. This is because web servers will by default look for an index.html page when users land on our websites - and not having one will cause big problems.
+- Every HTML page starts with a doctype declaration. The doctype’s purpose is to tell the browser what version of HTML it should use to render the document.
+	- current way to declare doctype is `<!DOCTYPE html>`
+- After we declare the doctype, we need to provide an `<html>` element. This is what’s known as the root element of the document, meaning that every other element in the document will be a descendant of it.
+- HTML Elements
+	- The ``<head>`` element is where we put important meta-information about our webpages, and stuff required for our webpages to render correctly in the browser. Inside the ``<head>``, we should not use any element that displays content on the webpage
+		- We should always have the meta tag for the charset encoding of the webpage in the head element: ``<meta charset="utf-8">``. Setting the encoding is very important because it ensures that the webpage will display special symbols and characters from different languages correctly in the browser.
+		- Another element we should always include in the head of an HTML document is the title element. The title element is used to give webpages a human-readable title which is displayed in our webpage’s browser tab.
+	- The final element needed to complete the HTML boilerplate is the `<body>` element. This is where all the content that will be displayed to users will go - the text, images, lists, links, and so on.
+	- use the ``<p>`` tag to declare a paragraph. this makes it so that text is formatted correctly, as opposed to it being compressed into one line.
+	- The ``<strong>`` element makes text bold. It also semantically marks text as important; this affects tools, like screen readers, that users with visual impairments will rely on to use your website.
+	- The `<em>` element makes text italic. It also semantically places emphasis on the text, which again may affect things like screen readers.
+	- Nesting elements creates a parent child relationship between the two elements. we use indentation to show nesting as it makes the code more readable
+	- Writing an HTML comment is simple: We just enclose the comment with `<!--` and `-->` tags. For example:
+- HTML Lists
+	- unordered lists created using the ``<ul>`` tag, ordered lists are created using the ``<ol>`` tag. each individual item within the list is created using the ``<li>`` tag.
+	- unordered lists separate items using a bullet point, ordered lists use numbers
+- HTML Links
+	- Links are one of the key features of HTML. They allow us to link to other HTML pages on the web. In fact, this is why it’s called the web.
+	- To create a link in HTML, we use the anchor element. An anchor element is defined by wrapping the text or another HTML element we want to be a link with an ``<a>`` tag.
+		- You may have noticed that clicking this link doesn’t do anything. This is because an anchor tag on its own won’t know where we want to link to. We have to tell it a destination to go to. We do this by using an HTML attribute.
+			- An HTML attribute gives additional information to an HTML element and always goes in the element’s opening tag.
+			- An attribute is usually made up of two parts: a name, and a value; however, not all attributes require a value.
+			- ex. ``<a href="https://www.theodinproject.com/about">click me</a>``
+				- By default, any text wrapped with an anchor tag without a href attribute will look like plain text. If the href attribute is present, the browser will give the text a blue color and underline it to signify it is a link.
+			- The method shown above opens links in the same tab as the webpage containing them. This is the default behaviour of most browsers and it can be changed relatively easily. All we need is another attribute: the `target` attribute.
+			- `href` just specifies to open the link `target` specifies where to open the link. if not specified, then by default the `_self` value will be added, which simply opens the link in the current tab. However, we can easily change this by adding in the `_blank` attribute as follows:
+				- ``<a href="https://www.heavensgate.com/" target="_blank" rel="noopener noreferrer">click me<a/>
+					- the `rel` attribute is used to describe relation.
+					- the `noopener` value prevents the opened link from gaining access to the webpage from which it was opened.
+					- the `noreferrer` value prevents the opened link from knowing which webpage or resource has a link to it. It also contains the `noopener` behavior and thus can be used alone.
+					- the added security of  `noopener` adds security against phishing, while `noreferrer` is used to prevents links from knowing your website uses them.
+					- most web browsers provide enough security to where `rel="noopener noreferrer"` is not necessary as long as `target="_blank"` is present. However, in line with best coding practices, it is advised to err on the side of caution and always pair the two together
+	- There are two kinds of links
+			- Absolute - links to pages on other websites, as in the previous example. Absolute links are made up of the following parts ``protocol://domain/path`` they will always contain protocol and domain
+			- Relative - links within the website. relative links to not include the domain as it is assumed.
+		- in general, when using lrelative links, we want to be as organized as possible; meaning that multiple directories for a website that have similar elements within them
+	- HTML images
+		- To display an image in HTML we use the <img> element. Unlike the other elements we have encountered, the <img> element is self-closing. Empty, self-closing HTML elements do not need a closing tag.
+		- we use the src= attribute,followed by the image path, to imbed images into a website. 
+		- to access an image that is in the parent directory of a file, use '../' before the image link
+		- all images need an alt attribute, which is used by text to speech and if the image is not loaded(describes the picture)
+			- alt attribute goes inside the image brackets after image link
+				- ``<img src="Images/dog.jpg" alt="picture of a pug">``
+
+

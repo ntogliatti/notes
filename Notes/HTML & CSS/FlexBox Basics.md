@@ -1,0 +1,72 @@
+**Flexbox**
+	- https://www.theodinproject.com/lessons/foundations-introduction-to-flexbox - Lesson
+	- https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/ - Lesson
+	- https://css-tricks.com/snippets/css/a-guide-to-flexbox/ - Cheatsheet
+	- CSS Grid is a more advanced version of flexbox and should also be learned
+	- A relatively new way of manipulating elements in CSS, industry standard
+	- Flexbox is a way to arrange items into rows or columns. These items will flex (i.e. grow or shrink) based on some simple rules that you can define.
+	-  flexbox is not just a single CSS property but a whole toolbox of properties that you can use to put things where you need them. Some of these properties belong on the _flex container_, while some go on the _flex items_. This is a simple yet important concept.
+	- A flex container is any element that has `display: flex` on it. A flex item is any element that lives directly inside of a flex container.
+	- Somewhat confusingly, any element can be both a flex container _and_ a flex item. Said another way, you can also put `display: flex` on a flex item and then use flexbox to arrange _its_ children. Creating and nesting multiple flex containers and items is the primary way we will be building up complex layouts.
+	- The `flex` declaration is actually a shorthand for 3 properties that you can set on a flex item. These properties affect how flex items size themselves within their container. You’ve seen some shorthand properties before, but we haven’t officially defined them yet.
+		- `flex` is shorthand for `flex-grow`, `flex-shrink` and `flex-basis`
+			- for example if we set `flex: 1`, we are actually saying `flex-grow: 1`, `flex-shrink: 1`, `flex-basis: 0`.
+		- `Flex-grow` expects a single number as its value, and the item is used as the item's growth factor. using `flex: 1`, or`flex-grow: 1` more specifically, is telling every item in the container to grow the same amount.
+			- along with this you can set a `flex` amount for a container and then specify a single item with a different `flex` value if you want it to be larger/smaller.
+		- `Flex-shrink` is similar to `flexgrow`, but instead sets the 'shrink factor' of an item.
+			- `flex-shrink` only ends up being applied if the size of all flex items is larger than their parent container.
+			- like `flex-grow` default shrink factor is '1', which means all items will shrink evenly. if you don't want an item to shrink, use `flex-shrink: 0`. you can also set the shrink rate to be higher for certain items if you want.
+		- An important implication to notice here is that when you specify `flex-grow` or `flex-shrink`, flex items do not necessarily respect your given values for `width`
+		- `flex-basis` simply sets the initial size of a flex item, so any sort of `flex-grow`ing or `flex-shrink`ing starts from that baseline size. default is 0%
+			- using `auto` tells `flex` to check the items width declaration before shrinking, instead of shrinking everything evenly. 
+			- Important note about flex-basis:
+				- There is a difference between the default value of flex-basis and the way the flex shorthand defines it if no flex-basis is given. The actual default value for flex-basis is auto, but when you specify flex: 1 on an element, it interprets that as flex: 1 1 0. If you want to only adjust an item’s flex-grow you can simply do so directly, without the shorthand. Or you can be more verbose and use the full 3 value shorthand flex: 1 1 auto, which is also equivalent to using flex: auto.
+				- in a Flex row, `flex-basis` does the same thing as `width`. In a Flex column, `flex-basis` does the same thing as `height`.
+				- 
+			- What is flex: auto
+				- If you noticed, we mentioned a new flex shorthand `flex: auto` in the previous note. However we didn’t fully introduce it. `flex: auto` is one of the shorthands of flex. When `auto` is defined as a flex keyword it is equivalent to the values of `flex-grow: 1`, `flex-shrink: 1` and `flex-basis: auto` or to `flex: 1 1 auto` using the flex shorthand. Note that `flex: auto` is not the default value when using the flex shorthand despite the name being “auto” which may be slightly confusing at first. You will encounter and learn more about `flex: auto` and its potential use-cases when reading through the assignment section.
+		- In practice you will likely not be using complex values for `flex-grow`, `flex-shrink` or `flex-basis`. Generally, you’re most likely to use declarations like `flex: 1;` to make divs grow evenly and `flex-shrink: 0` to keep certain divs from shrinking.
+		- It _is_ possible to get fancy, and set up layouts where some columns relate to each other in a specific ratio, so it’s useful to know that you can use other values, but those are relatively rare.
+	- Axes
+		- The most confusing thing about flexbox is that it can work either horizontally or vertically, and some rules change a bit depending on which direction you are working with.
+		- The default direction for a flex container is horizontal, or `row`, but you can change the direction to vertical, or `column` by simply using `flex-direction` in your flex container
+		- No matter which direction you’re using, you need to think of your flex-containers as having 2 axes: the main axis and the cross axis
+			-  It is the direction of these axes that changes when the `flex-direction` is changed. In _most_ circumstances, `flex-direction: row` puts the main axis horizontal (left-to-right), and `column` puts the main axis vertical (top-to-bottom).
+		- The fundamental difference between the primary and cross axis is that, one the cross axis items can act independently from one another, and on the primary axis items must act as a group. you can move individual items on the cross axis without them running into other items, this is not the case for the primary axis.
+	- Alignment
+		- `justify-content` aligns items across the **main axis**. There are a few values that you can use here.
+		- To change the placement of items along the **cross axis** use `align-items`
+		- Because `justify-content` and `align-items` are based on the main and cross axis of your container, their behavior changes when you change the flex-direction of a flex-container. For example, when you change `flex-direction` to `column`, `justify-content` aligns vertically and `align-items` aligns horizontally
+			- The most common behavior, however, is the default, i.e. `justify-content` aligns items horizontally (because the main axis defaults to horizontal), and `align-items` aligns them vertically
+		- When it comes to the primary axis, we don't generally think in terms of aligning a single child. Instead, it's all about the _distribution of the group._
+		- We can bunch all the items up in a particular spot (with `flex-start`, `center`, and `flex-end`), or we can spread them apart (with `space-between`, `space-around`, and `space-evenly`).
+		- **For the cross axis, things are a bit different.** We use the `align-items` property
+		- `align-self` is applied to the _child element_, not the container. It allows us to change the alignment of a specific child along the cross axis
+		- `align-self` has all the same values as `align-items`. In fact, **they change the exact same thing.** `align-items` is _syntactic sugar_, a convenient shorthand that automatically sets the alignment on all the children at once.
+		- `justify` — to position something along the _primary axis_.
+		- `align` — to position something along the _cross axis_.
+		- `content` — a group of “stuff” that can be distributed.
+		- `items` — single items that can be positioned individually.
+		- The Flexbox algorithm refuses to shrink a child below its minimum size. The content will overflow rather than shrink further, _no matter how high we crank `flex-shrink
+			- We can redefine the minimum size with the `min-width` property.
+				- It's worth noting that the built-in minimum size _does_ serve a purpose. It's meant to act as a guardrail, to prevent something even worse from happening. For example: when we apply `min-width: 0px` to our text-containing Flex children, things break in an even worse way:
+			- `justify-content:` takes the following values
+				- `flex-start`: Items align to the left side of the container.
+				- `flex-end`: Items align to the right side of the container.
+				- `center`: Items align at the center of the container.
+				- `space-between`: Items display with equal spacing between them.
+				- `space-around`: Items display with equal spacing around them.
+			- `aling-items:` takes the following values
+				-`flex-start`: Items align to the top of the container.
+				- `flex-end`: Items align to the bottom of the container.
+				- `center`: Items align at the vertical center of the container.
+				- `baseline`: Items display at the baseline of the container.
+				- `stretch`: Items are stretched to fit the container.
+	- Gap
+		- Setting `gap` on a flex container simply adds a specified space between flex items, similar to adding a margin to the items themselves.
+		- `gap` is a _new_ property so it doesn’t show up in many resources yet, but it works reliably in all modern browsers, so it is safe to use and very handy!
+	- Margin
+		- The `margin` property is used to add space around a specific element. In some layout modes, like Flow and Positioned, it can even be used to center an element, with `margin: auto`.
+		- Auto margins will **gobble up the extra space, and apply it to the element's margin.** It gives us precise control over where to distribute the extra space.
+	- Wrapping
+		- So far, all of our items have sat side-by-side, in a single row/column. The `flex-wrap` property allows us to change that. When we set `flex-wrap: wrap`, **items won't shrink below their hypothetical size**. At least, not when wrapping onto the next row/column is an option!
